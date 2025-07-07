@@ -7,6 +7,7 @@ import com.exemplo.app.models.Usuario;
 import com.exemplo.app.services.UsuarioService;
 
 import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -28,5 +29,17 @@ public class UsuarioController {
     public ResponseEntity<Usuario> login(@RequestParam String email, @RequestParam String senha) {
         Optional<Usuario> usuario = usuarioService.login(email, senha);
         return usuario.map(ResponseEntity::ok).orElse(ResponseEntity.badRequest().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> excluir(@PathVariable Long id, @RequestBody(required = false) Map<String, String> body) {
+        String motivo = body != null ? body.get("motivos") : null;
+        String detalhes = body != null ? body.get("detalhes") : null;
+        try {
+            String mensagem = usuarioService.excluir(id, motivo, detalhes);
+            return ResponseEntity.ok(mensagem);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

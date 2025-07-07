@@ -13,3 +13,9 @@ tres requisições que simulam os casos de teste do roteiro RT11.
 Para executar os testes importe a coleção no Postman e acione o botão
 **Run**.
 
+## Testes Postman para RT12
+
+Uma coleção Postman `postman/RT12.postman_collection.json` contém o caso **CT04** para exclusão de usuário.
+
+1. **CT04** – exclui um usuário enviando motivo e detalhes. Espera HTTP `200` com a mensagem `"Sua conta foi excluída com sucesso"`.
+
