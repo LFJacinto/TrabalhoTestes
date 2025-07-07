@@ -1,1 +1,15 @@
 
+## Testes Postman para RT11
+
+Uma coleção Postman foi adicionada em `postman/RT11.postman_collection.json` com
+tres requisições que simulam os casos de teste do roteiro RT11.
+
+1. **CT01** – cria usuário válido. Espera HTTP `201` e retorno do usuário criado.
+2. **CT02** – cria usuário com código de verificação inválido. Espera HTTP `400`
+   com a mensagem `"Código informado inválido"`.
+3. **CT03** – tenta cadastrar o mesmo email novamente. Espera HTTP `400` com a
+   mensagem `"Este email já está vinculado a uma conta"`.
+
+Para executar os testes importe a coleção no Postman e acione o botão
+**Run**.
+
