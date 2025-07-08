@@ -38,4 +38,18 @@ public class UsuarioServiceTest {
         Optional<Usuario> result = service.login("teste@teste.com", "errado");
         assertTrue(result.isEmpty());
     }
+
+    @Test
+    public void testExcluirUsuarioComDetalhes() {
+        UsuarioRepository repo = mock(UsuarioRepository.class);
+        UsuarioService service = new UsuarioService(repo);
+
+        Long id = 1L;
+        when(repo.existsById(id)).thenReturn(true);
+
+        String msg = service.excluir(id, "Casos de teste");
+
+        verify(repo).deleteById(id);
+        assertEquals("Sua conta foi excluída com sucesso", msg);
+    }
 }

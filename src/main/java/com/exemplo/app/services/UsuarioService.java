@@ -33,4 +33,12 @@ public class UsuarioService {
         }
         return Optional.empty();
     }
+
+    public String excluir(Long id, String detalhes) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new IllegalArgumentException("Usuário não encontrado");
+        }
+        usuarioRepository.deleteById(id);
+        return "Sua conta foi excluída com sucesso";
+    }
 }
