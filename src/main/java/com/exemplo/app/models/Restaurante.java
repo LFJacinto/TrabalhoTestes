@@ -6,9 +6,6 @@ import jakarta.persistence.*;
 public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-public class Restaurante {
-
     private Long id;
     private String nome;
     private boolean aberto;

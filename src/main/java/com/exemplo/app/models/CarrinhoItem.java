@@ -10,15 +10,12 @@ public class CarrinhoItem {
     private Long id;
 
     @ManyToOne
-import java.time.Instant;
-
-public class CarrinhoItem {
     private Produto produto;
     private int quantidade;
     private Instant adicionadoEm;
 
     public CarrinhoItem() {}
-  
+
     public CarrinhoItem(Produto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;
