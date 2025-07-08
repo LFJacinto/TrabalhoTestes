@@ -1,9 +1,19 @@
 package com.exemplo.app.models;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Restaurante {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class Restaurante {
+
     private Long id;
     private String nome;
     private boolean aberto;
+
+    public Restaurante() {}
 
     public Restaurante(Long id, String nome, boolean aberto) {
         this.id = id;

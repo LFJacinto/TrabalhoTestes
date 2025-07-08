@@ -1,5 +1,19 @@
 package com.exemplo.app.models;
 
+import jakarta.persistence.*;
+
+@Entity
+public class Produto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private double preco;
+    @ManyToOne
+    private Restaurante restaurante;
+
+    public Produto() {}
+
 public class Produto {
     private Long id;
     private String nome;

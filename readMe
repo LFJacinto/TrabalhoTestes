@@ -19,10 +19,6 @@ Uma coleção Postman `postman/RT12.postman_collection.json` contém o caso **CT
 
 1. **CT04** – exclui um usuário enviando motivo e detalhes. Espera HTTP `200` com a mensagem `"Sua conta foi excluída com sucesso"`.
 
-
-
-## Testes Postman para RT13
-
 A coleção `postman/RT13.postman_collection.json` cobre os casos de gerenciamento do carrinho de compras:
 
 1. **CT05** – tenta adicionar 1000 unidades de "Pastel". Espera HTTP `400` e mensagem `"Ops! Você atingiu o limite máximo de itens no carrinho"`.
@@ -31,4 +27,3 @@ A coleção `postman/RT13.postman_collection.json` cobre os casos de gerenciamen
 4. **CT08** – adiciona "Hambúrguer" e duas "Pizza" e confirma que o total exibido é `80`.
 
 Importe a coleção e execute as requisições para validar o comportamento.
-=======
