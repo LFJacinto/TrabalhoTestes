@@ -17,6 +17,12 @@ public class UsuarioService {
     }
 
     public Usuario cadastrar(Usuario usuario) {
+        if (!"xxxxxx".equals(usuario.getCodigo())) {
+            throw new IllegalArgumentException("Código informado inválido");
+        }
+        if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
+            throw new IllegalStateException("Este email já está vinculado a uma conta");
+        }
         return usuarioRepository.save(usuario);
     }
 
