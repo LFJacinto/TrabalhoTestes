@@ -17,12 +17,6 @@ public class UsuarioService {
     }
 
     public Usuario cadastrar(Usuario usuario) {
-        if (!"xxxxxx".equals(usuario.getCodigo())) {
-            throw new IllegalArgumentException("Código informado inválido");
-        }
-        if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
-            throw new IllegalStateException("Este email já está vinculado a uma conta");
-        }
         return usuarioRepository.save(usuario);
     }
 
@@ -32,13 +26,5 @@ public class UsuarioService {
             return Optional.of(usuario);
         }
         return Optional.empty();
-    }
-
-    public String excluir(Long id, String motivo, String detalhes) {
-        if (!usuarioRepository.existsById(id)) {
-            throw new IllegalArgumentException("Usuário não encontrado");
-        }
-        usuarioRepository.deleteById(id);
-        return "Sua conta foi excluída com sucesso";
     }
 }
