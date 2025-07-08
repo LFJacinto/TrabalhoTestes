@@ -3,6 +3,7 @@ package com.exemplo.app.services;
 import com.exemplo.app.models.*;
 import com.exemplo.app.repositories.CarrinhoItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -13,7 +14,7 @@ import java.util.*;
 public class CarrinhoService {
     private static final int LIMITE_ITENS = 50;
     private static final Duration TEMPO_MAX = Duration.ofMinutes(45);
-
+  
     private final CarrinhoItemRepository carrinhoRepo;
     private final Map<Long, Restaurante> restaurantes = new HashMap<>();
     private final Map<Long, Produto> produtos = new HashMap<>();
@@ -21,6 +22,12 @@ public class CarrinhoService {
     @Autowired
     public CarrinhoService(CarrinhoItemRepository carrinhoRepo) {
         this.carrinhoRepo = carrinhoRepo;
+
+    private final List<CarrinhoItem> itens = new ArrayList<>();
+    private final Map<Long, Restaurante> restaurantes = new HashMap<>();
+    private final Map<Long, Produto> produtos = new HashMap<>();
+
+    public CarrinhoService() {
         Restaurante aberto = new Restaurante(1L, "Restaurante A", true);
         Restaurante fechado = new Restaurante(2L, "Restaurante B", false);
         restaurantes.put(1L, aberto);
@@ -39,38 +46,66 @@ public class CarrinhoService {
         if (!produto.getRestaurante().isAberto()) {
             throw new IllegalStateException("Esta loja está fechada no momento.");
         }
+      
         int totalQtd = carrinhoRepo.findAll().stream()
                 .mapToInt(CarrinhoItem::getQuantidade).sum() + quantidade;
         if (totalQtd > LIMITE_ITENS) {
             throw new IllegalStateException("Ops! Você atingiu o limite máximo de itens no carrinho");
         }
         Optional<CarrinhoItem> existente = carrinhoRepo.findAll().stream()
+
+        int totalQtd = itens.stream().mapToInt(CarrinhoItem::getQuantidade).sum() + quantidade;
+        if (totalQtd > LIMITE_ITENS) {
+            throw new IllegalStateException("Ops! Você atingiu o limite máximo de itens no carrinho");
+        }
+        Optional<CarrinhoItem> existente = itens.stream()
+
                 .filter(i -> i.getProduto().getId().equals(produtoId))
                 .findFirst();
         if (existente.isPresent()) {
             CarrinhoItem item = existente.get();
             item.setQuantidade(item.getQuantidade() + quantidade);
+
             return carrinhoRepo.save(item);
         }
         CarrinhoItem novo = new CarrinhoItem(produto, quantidade);
         return carrinhoRepo.save(novo);
+
+            return item;
+        }
+        CarrinhoItem novo = new CarrinhoItem(produto, quantidade);
+        itens.add(novo);
+        return novo;
+
     }
 
     public synchronized List<CarrinhoItem> listarItens() {
         limparExpirados();
+
         return carrinhoRepo.findAll();
+
+        return new ArrayList<>(itens);
+
     }
 
     private void limparExpirados() {
         Instant agora = Instant.now();
+
         carrinhoRepo.findAll().stream()
             .filter(i -> Duration.between(i.getAdicionadoEm(), agora).compareTo(TEMPO_MAX) > 0)
             .forEach(i -> carrinhoRepo.deleteById(i.getId()));
+
+        itens.removeIf(i -> Duration.between(i.getAdicionadoEm(), agora).compareTo(TEMPO_MAX) > 0);
+
     }
 
     public synchronized double calcularTotal() {
         limparExpirados();
+
         return carrinhoRepo.findAll().stream().mapToDouble(CarrinhoItem::getSubtotal).sum();
+
+        return itens.stream().mapToDouble(CarrinhoItem::getSubtotal).sum();
+
     }
 
     // util para testes
