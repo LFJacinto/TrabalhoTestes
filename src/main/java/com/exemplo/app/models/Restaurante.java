@@ -1,0 +1,25 @@
+package com.exemplo.app.models;
+
+import jakarta.persistence.*;
+
+@Entity
+public class Restaurante {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private boolean aberto;
+
+    public Restaurante() {}
+
+    public Restaurante(Long id, String nome, boolean aberto) {
+        this.id = id;
+        this.nome = nome;
+        this.aberto = aberto;
+    }
+
+    public Long getId() { return id; }
+    public String getNome() { return nome; }
+    public boolean isAberto() { return aberto; }
+    public void setAberto(boolean aberto) { this.aberto = aberto; }
+}

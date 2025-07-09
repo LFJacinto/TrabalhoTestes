@@ -1,0 +1,39 @@
+{
+  "info": {
+    "name": "RT12 Excluir Usuario",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CT04 - Excluir usuario",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "url": {
+          "raw": "http://localhost:8080/usuarios/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["usuarios", "1"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"motivos\": \"Casos de teste\",\n  \"detalhes\": \"Casos de teste\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Mensagem sucesso\", function () { pm.expect(pm.response.text()).to.eql('Sua conta foi excluída com sucesso'); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,37 @@
-## Testes Postman para RT11
+
+
+4ina2q-codex/implementar-testes-rt11-no-postman
+
+
+Uma coleção Postman foi adicionada em `postman/RT11.postman_collection.json` com
+tres requisições que simulam os casos de teste do roteiro RT11.
+
+1. **CT01** – cria usuário válido. Espera HTTP `201` e retorno do usuário criado.
+2. **CT02** – cria usuário com código de verificação inválido. Espera HTTP `400`
+   com a mensagem `"Código informado inválido"`.
+3. **CT03** – tenta cadastrar o mesmo email novamente. Espera HTTP `400` com a
+   mensagem `"Este email já está vinculado a uma conta"`.
+
+Para executar os testes importe a coleção no Postman e acione o botão
+**Run**.
+
+## Testes Postman para RT12
+
+Uma coleção Postman `postman/RT12.postman_collection.json` contém o caso **CT04** para exclusão de usuário.
+
+1. **CT04** – exclui um usuário enviando motivo e detalhes. Espera HTTP `200` com a mensagem `"Sua conta foi excluída com sucesso"`.
+
+
+## Testes Postman para RT13
+
+A coleção `postman/RT13.postman_collection.json` cobre os casos de gerenciamento do carrinho de compras:
+
+1. **CT05** – tenta adicionar 1000 unidades de "Pastel". Espera HTTP `400` e mensagem `"Ops! Você atingiu o limite máximo de itens no carrinho"`.
+2. **CT06** – adiciona um "Bolo" ao carrinho e verifica que o item permanece listado.
+3. **CT07** – tenta adicionar "Açaí" de restaurante fechado. Espera HTTP `400` com `"Esta loja está fechada no momento."`.
+4. **CT08** – adiciona "Hambúrguer" e duas "Pizza" e confirma que o total exibido é `80`.
+
+Importe a coleção e execute as requisições para validar o comportamento.
 
 Uma coleção Postman foi adicionada em `postman/RT11.postman_collection.json` com três requisições que simulam os casos de teste do roteiro RT11.
 

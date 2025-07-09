@@ -34,7 +34,11 @@ public class UsuarioService {
         return Optional.empty();
     }
 
+ 4ina2q-codex/implementar-testes-rt11-no-postman
+    public String excluir(Long id, String motivo, String detalhes) {
+
     public String excluir(Long id, String detalhes) {
+ main
         if (!usuarioRepository.existsById(id)) {
             throw new IllegalArgumentException("Usuário não encontrado");
         }
