@@ -1,9 +1,9 @@
 package com.exemplo.app.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.exemplo.app.models.Usuario;
 import com.exemplo.app.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -34,11 +34,7 @@ public class UsuarioService {
         return Optional.empty();
     }
 
- 4ina2q-codex/implementar-testes-rt11-no-postman
-    public String excluir(Long id, String motivo, String detalhes) {
-
     public String excluir(Long id, String detalhes) {
- main
         if (!usuarioRepository.existsById(id)) {
             throw new IllegalArgumentException("Usuário não encontrado");
         }

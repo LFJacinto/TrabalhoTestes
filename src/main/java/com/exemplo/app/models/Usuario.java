@@ -7,10 +7,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-4ina2q-codex/implementar-testes-rt11-no-postman
 
-
-main
     private String nomeCompleto;
     private String email;
     private String telefone;
@@ -18,20 +15,11 @@ main
     private String cpf;
     private String senha;
 
-    // getters and setters
+    // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getNomeCompleto() { return nomeCompleto; }
     public void setNomeCompleto(String nomeCompleto) { this.nomeCompleto = nomeCompleto; }
- 4ina2q-codex/implementar-testes-rt11-no-postman
-
-    public String getTelefone() { return telefone; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
-    public String getCodigo() { return codigo; }
-    public void setCodigo(String codigo) { this.codigo = codigo; }
-    public String getCpf() { return cpf; }
-    public void setCpf(String cpf) { this.cpf = cpf; }
- main
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public String getTelefone() { return telefone; }
