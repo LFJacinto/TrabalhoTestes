@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -35,9 +36,10 @@ public class UsuarioIntegrationTest {
     @Test
     @DisplayName("CT21 - Senha com menos de 8 caracteres")
     void senhaCurta() throws Exception {
-        mockMvc.perform(post("/usuarios/alterar-senha")  // ajuste o endpoint conforme necessário
+        mockMvc.perform(post("/usuarios/alterar-senha")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonBody("SenhaAntiga123!", "aB1@cDe", "aB1@cDe")))
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.mensagem").value("A senha deve ter pelo menos 8 caracteres."));
     }
@@ -48,6 +50,7 @@ public class UsuarioIntegrationTest {
         mockMvc.perform(post("/usuarios/alterar-senha")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonBody("SenhaAntiga123!", "novasenha123@", "novasenha123@")))
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.mensagem").value("A senha deve conter pelo menos uma letra maiúscula."));
     }
@@ -58,6 +61,7 @@ public class UsuarioIntegrationTest {
         mockMvc.perform(post("/usuarios/alterar-senha")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonBody("SenhaAntiga123!", "NovaSenha123", "NovaSenha123")))
+                .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.mensagem").value("A senha deve conter pelo menos um caractere especial."));
     }
@@ -68,6 +72,7 @@ public class UsuarioIntegrationTest {
         mockMvc.perform(post("/usuarios/alterar-senha")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonBody("SenhaAntiga123!", "NovaSenha@2025", "NovaSenha@2025")))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.mensagem").value("Senha alterada com sucesso."));
     }

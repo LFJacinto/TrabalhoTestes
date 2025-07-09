@@ -41,4 +41,23 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/alterar-senha")
+    public ResponseEntity<?> alterarSenha(@RequestBody Map<String, String> body) {
+        String senhaAtual = body.get("senhaAtual");
+        String novaSenha = body.get("novaSenha");
+        String confirmacaoNovaSenha = body.get("confirmacaoNovaSenha");
+
+        if (novaSenha.length() < 8) {
+            return ResponseEntity.badRequest().body(Map.of("mensagem", "A senha deve ter pelo menos 8 caracteres."));
+        }
+        if (!novaSenha.matches(".*[A-Z].*")) {
+            return ResponseEntity.badRequest().body(Map.of("mensagem", "A senha deve conter pelo menos uma letra maiúscula."));
+        }
+        if (!novaSenha.matches(".*[^a-zA-Z0-9].*")) {
+            return ResponseEntity.badRequest().body(Map.of("mensagem", "A senha deve conter pelo menos um caractere especial."));
+        }
+
+        return ResponseEntity.ok(Map.of("mensagem", "Senha alterada com sucesso."));
+    }
 }

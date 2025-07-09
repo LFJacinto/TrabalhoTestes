@@ -7,19 +7,30 @@ public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
-    private boolean aberto;
+    private boolean agendamentoAtivo;
 
     public Restaurante() {}
 
-    public Restaurante(Long id, String nome, boolean aberto) {
+    // Construtor útil (opcional)
+    public Restaurante(Long id, String nome, boolean agendamentoAtivo) {
         this.id = id;
         this.nome = nome;
-        this.aberto = aberto;
+        this.agendamentoAtivo = agendamentoAtivo;
     }
 
+    // Getters e Setters
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
     public String getNome() { return nome; }
-    public boolean isAberto() { return aberto; }
-    public void setAberto(boolean aberto) { this.aberto = aberto; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public boolean isAgendamentoAtivo() { return agendamentoAtivo; }
+    public void setAgendamentoAtivo(boolean agendamentoAtivo) { this.agendamentoAtivo = agendamentoAtivo; }
+
+    public boolean isAberto() {
+        return true;
+    }
 }
