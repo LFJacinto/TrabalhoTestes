@@ -57,7 +57,7 @@ public class PedidoControllerTest {
     }
 
     @Test
-    @DisplayName("CT39 - Agendar um pedido para o dia seguinte em um restaurante que não permite agendamento")
+    @DisplayName("CT39 - Agendar um pedido em um restaurante que não permite agendamento")
     void agendarPedidoRestauranteNaoAceitaAgendamento() throws Exception {
         Pedido pedido = new Pedido();
         pedido.setDataHoraEntrega(LocalDateTime.now().plusDays(1));
