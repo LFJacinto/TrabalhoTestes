@@ -15,7 +15,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+4ina2q-codex/implementar-testes-rt11-no-postman
     @PostMapping("/cadastro")
+
+    @PostMapping
+main
     public ResponseEntity<?> cadastrar(@RequestBody Usuario usuario) {
         try {
             Usuario criado = usuarioService.cadastrar(usuario);

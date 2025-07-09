@@ -1,17 +1,26 @@
 {
   "info": {
+ 4ina2q-codex/implementar-testes-rt11-no-postman
     "name": "RT11 Usuario",
+
+    "name": "RT11 - Criar Usuário",
+main
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
+ 4ina2q-codex/implementar-testes-rt11-no-postman
       "name": "CT01 - Criar usuario valido",
+
+      "name": "CT01 - Criar usuário com dados válidos",
+ main
       "request": {
         "method": "POST",
         "header": [
           {"key": "Content-Type", "value": "application/json"}
         ],
         "url": {
+ 4ina2q-codex/implementar-testes-rt11-no-postman
           "raw": "http://localhost:8080/usuarios/cadastro",
           "protocol": "http",
           "host": ["localhost"],
@@ -21,6 +30,17 @@
         "body": {
           "mode": "raw",
           "raw": "{\n  \"nomeCompleto\": \"Lucas Felicio Jacinto\",\n  \"email\": \"lfeliciojacinto@gmail.com\",\n  \"telefone\": \"47 99110-6059\",\n  \"codigo\": \"xxxxxx\",\n  \"cpf\": \"10879958928\",\n  \"senha\": \"123456\"\n}"
+
+          "raw": "http://localhost:8080/usuarios",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["usuarios"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lfeliciojacinto@gmail.com\",\n  \"telefone\": \"47 99110-6059\",\n  \"codigo\": \"xxxxxx\",\n  \"nomeCompleto\": \"Lucas Felicio Jacinto\",\n  \"cpf\": \"10879958928\",\n  \"senha\": \"123456\"\n}"
+main
         }
       },
       "event": [
@@ -37,13 +57,18 @@
       ]
     },
     {
+ 4ina2q-codex/implementar-testes-rt11-no-postman
       "name": "CT02 - Codigo invalido",
+
+      "name": "CT02 - Código inválido",
+ main
       "request": {
         "method": "POST",
         "header": [
           {"key": "Content-Type", "value": "application/json"}
         ],
         "url": {
+4ina2q-codex/implementar-testes-rt11-no-postman
           "raw": "http://localhost:8080/usuarios/cadastro",
           "protocol": "http",
           "host": ["localhost"],
@@ -53,6 +78,17 @@
         "body": {
           "mode": "raw",
           "raw": "{\n  \"nomeCompleto\": \"Lucas Felicio Jacinto\",\n  \"email\": \"lfeliciojacinto@gmail.com\",\n  \"telefone\": \"47 99110-6059\",\n  \"codigo\": \"abc123\",\n  \"cpf\": \"10879958928\",\n  \"senha\": \"123456\"\n}"
+
+          "raw": "http://localhost:8080/usuarios",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["usuarios"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lfeliciojacinto@gmail.com\",\n  \"telefone\": \"47 99110-6059\",\n  \"codigo\": \"abc123\",\n  \"nomeCompleto\": \"Lucas Felicio Jacinto\",\n  \"cpf\": \"10879958928\",\n  \"senha\": \"123456\"\n}"
+ main
         }
       },
       "event": [
@@ -61,6 +97,7 @@
           "script": {
             "exec": [
               "pm.test(\"Status 400\", function () { pm.response.to.have.status(400); });",
+ 4ina2q-codex/implementar-testes-rt11-no-postman
               "pm.test(\"Mensagem de erro\", function () { pm.expect(pm.response.text()).to.eql('C\u00f3digo informado inv\u00e1lido'); });"
             ]
           }
@@ -69,12 +106,23 @@
     },
     {
       "name": "CT03 - Usuario existente",
+
+              "pm.test(\"Mensagem de erro\", function () { pm.expect(pm.response.text()).to.eql('Código informado inválido'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CT03 - Usuário já existente",
+ main
       "request": {
         "method": "POST",
         "header": [
           {"key": "Content-Type", "value": "application/json"}
         ],
         "url": {
+ 4ina2q-codex/implementar-testes-rt11-no-postman
           "raw": "http://localhost:8080/usuarios/cadastro",
           "protocol": "http",
           "host": ["localhost"],
@@ -84,6 +132,17 @@
         "body": {
           "mode": "raw",
           "raw": "{\n  \"nomeCompleto\": \"Lucas Felicio Jacinto\",\n  \"email\": \"lfeliciojacinto@gmail.com\",\n  \"telefone\": \"47 99110-6059\",\n  \"codigo\": \"xxxxxx\",\n  \"cpf\": \"10879958928\",\n  \"senha\": \"123456\"\n}"
+
+          "raw": "http://localhost:8080/usuarios",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["usuarios"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lfeliciojacinto@gmail.com\",\n  \"telefone\": \"47 99110-6059\",\n  \"codigo\": \"xxxxxx\",\n  \"nomeCompleto\": \"Lucas Felicio Jacinto\",\n  \"cpf\": \"10879958928\",\n  \"senha\": \"123456\"\n}"
+main
         }
       },
       "event": [
@@ -92,7 +151,11 @@
           "script": {
             "exec": [
               "pm.test(\"Status 400\", function () { pm.response.to.have.status(400); });",
+4ina2q-codex/implementar-testes-rt11-no-postman
               "pm.test(\"Mensagem de email duplicado\", function () { pm.expect(pm.response.text()).to.eql('Este email j\u00e1 est\u00e1 vinculado a uma conta'); });"
+
+              "pm.test(\"Mensagem de email duplicado\", function () { pm.expect(pm.response.text()).to.eql('Este email já está vinculado a uma conta'); });"
+ main
             ]
           }
         }

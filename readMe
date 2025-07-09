@@ -1,5 +1,7 @@
 
-## Testes Postman para RT11
+
+4ina2q-codex/implementar-testes-rt11-no-postman
+
 
 Uma coleção Postman foi adicionada em `postman/RT11.postman_collection.json` com
 tres requisições que simulam os casos de teste do roteiro RT11.
@@ -30,3 +32,11 @@ A coleção `postman/RT13.postman_collection.json` cobre os casos de gerenciamen
 4. **CT08** – adiciona "Hambúrguer" e duas "Pizza" e confirma que o total exibido é `80`.
 
 Importe a coleção e execute as requisições para validar o comportamento.
+
+Uma coleção Postman foi adicionada em `postman/RT11.postman_collection.json` com três requisições que simulam os casos de teste do roteiro RT11.
+
+1. **CT01** – cria usuário válido. Espera HTTP `201` e retorno do usuário criado.
+2. **CT02** – código de verificação incorreto. Espera HTTP `400` com a mensagem `"Código informado inválido"`.
+3. **CT03** – tenta cadastrar o mesmo email novamente. Espera HTTP `400` com a mensagem `"Este email já está vinculado a uma conta"`.
+
+Para executar os testes, importe a coleção no Postman e clique em **Run**.
